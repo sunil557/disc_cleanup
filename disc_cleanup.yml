@@ -1,12 +1,12 @@
 ---
 #Below play for Windows end points (MUST)
-- name: Role ensures that the socks tunnel is setup
-  hosts: localhost
-  connection: local
-  gather_facts: false
-  roles:
-    - role: ansible-role-event-socks-tunnel
-  tags: always
+# - name: Role ensures that the socks tunnel is setup
+#   hosts: localhost
+#   connection: local
+#   gather_facts: false
+#   roles:
+#     - role: ansible-role-event-socks-tunnel
+#   tags: always
 
 - name: "Execute disc_cleanup on windows remote endpoint"
   hosts: all
