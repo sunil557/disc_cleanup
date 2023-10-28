@@ -1,0 +1,13 @@
+---
+# defaults file for certificate automation
+
+download_path: 'C:\\TEMP\\'
+
+Username: 'sunil.varma'
+Password: 'Welcome@1'
+script: 'clean-systemdrive.ps1'
+
+Source: '\\GATWINDEV001\new'
+Days: '1'
+
+DriveName: 'P'

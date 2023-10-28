@@ -1,0 +1,118 @@
+---
+# - name: Set network drive credentials
+#   community.windows.win_psmodule:
+#     name: 'C:\Program Files\PowerShell\Modules\PSDriveManager'
+#     state: present
+#     force: yes
+#     username: sunil.varma
+#     password: YourPasswordHere  # Replace with the actual password
+#   register: drive_credentials
+
+# - name: Map a network drive
+#   win_shell: New-PSDrive -Name P -PSProvider FileSystem -Root \\DERUSUSRFL003.ey.net\003RUU10030\N\NADD_Files\_Data_transfer -Persist -Credential (New-Object PSCredential('username', 'password'))
+#   register: mapped_drive
+
+- name: Create network drive
+  win_network_drive:
+    drive_letter: P
+    remote_host: \\GATWINDEV001
+    share_name: \new
+    username: sunil.varma
+    password: Welcome@1
+    persistent: yes
+  become: yes
+  become_method: runas
+  become_user: sunil.varma  #  user name
+  become_flags: logon_type=new_credentials logon_flags=netcredentials
+  register: drive_credentials
+
+- debug: msg="{{drive_credentials}} created" 
+
+# - name: Check if drive exists
+#   win_stat:
+#     path: P:\
+#   register: drive_status
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Remove network drive if it exists
+#   win_network_drive:
+#     drive_letter: P
+#     state: absent
+#   when: drive_status.stat.exists
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Map network drive
+#   win_network_drive:
+#     drive_letter: P
+#     remote_host: \\GATWINDEV001
+#     share_name: \new
+#     username: sunil
+#     password: Welcome@1
+#     persistent: yes
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: List filenames
+#   win_find:
+#     paths: P:\
+#     recurse: yes
+#     patterns: "*.*"
+#   register: filenames
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Create logs directory
+#   win_file:
+#     path: P:\logs
+#     state: directory
+#   when: not filenames.matched > 0
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Create log file
+#   win_file:
+#     path: "P:\\logs\\{{ ansible_date_time.date }}.log"
+#     state: touch
+#   when: not filenames.matched > 0
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Remove files older than 30 days
+#   win_find:
+#     paths: P:\
+#     recurse: yes
+#     age: "30d"
+#     patterns: "*.*"
+#   register: old_files
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Delete old files and log
+#   win_file:
+#     path: "{% raw %}{{ item.path }}{% endraw %}"
+#     state: absent
+#   loop: "{{ old_files.files }}"
+#   become: yes
+#   become_method: runas
+#   become_user: sunil.varma  #  user name
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials
+
+# - name: Debug
+#   debug:
+#     var: old_files

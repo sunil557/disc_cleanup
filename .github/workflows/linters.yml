@@ -1,0 +1,15 @@
+name: Lint
+on: 
+  push:
+  pull_request:
+    branches: [main, dev, "*/main", master]
+ 
+jobs:
+  lint:
+    name: ansible-lint
+    uses: Continuous-Engineering/ce-workflows/.github/workflows/lint.yml@main
+
+  markdown:
+    name: markdown-lint
+    # A specific version can be specified as well.
+    uses: Continuous-Engineering/ce-workflows/.github/workflows/markdown.yml@main

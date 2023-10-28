@@ -1,0 +1,21 @@
+---
+- name: copy power shell scripts from local to target host
+  win_copy:
+    src: "{{ script }}"
+    dest: "{{ download_path }}"
+
+- name: Run the power shell script 
+#  win_command: powershell.exe -ExecutionPolicy ByPass -File C:\TEMP\clean-systemdrive.ps1 {{user_name}} {{user_password}} {{source_path}} {{files_days}} {{drive_name}}
+#  become_method: runas
+  win_command: powershell.exe -ExecutionPolicy ByPass -File C:\TEMP\clean-systemdrive.ps1
+  args:
+    argv:
+      - "-Username {{ Username }}"
+      - "-Password {{ Password }}"
+      - "-Source {{ Source }}"
+      - "-Days {{ Days }}"
+      - "-DriveName {{ DriveName }}"
+  register: result
+
+
+- debug: msg="{{result}}" 

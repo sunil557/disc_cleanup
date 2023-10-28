@@ -1,0 +1,10 @@
+---
+- name: returncode
+  scm: git
+  src: git+https://github.kyndryl.net/Continuous-Engineering/ansible_role_returncode.git
+  version: 1.3/main
+
+- name: ansible-role-event-socks-tunnel
+  src: git+https://github.kyndryl.net/Continuous-Engineering/ansible-role-event-socks-tunnel.git
+  scm: git
+  version: 23.5/main

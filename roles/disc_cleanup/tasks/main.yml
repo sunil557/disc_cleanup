@@ -1,0 +1,4 @@
+---
+
+- name: Disc cleanup
+  include_tasks: disc_cleanup.yml
