@@ -1,13 +1,13 @@
 Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
 
-$Username = "sunil.varma@gat.com"
-$Password = "Welcome@1"
+$Username = "sunil"
+$Password = "Welcome@1Welcome@1"
 $Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
 $Creds = new-object System.Management.Automation.PSCredential ($Username , $Password)
 
-$Source = "\\GATWINDEV001\new"
+$Source = "\\win1\share"
 $Days = "1"
 
 $DriveName="P"
