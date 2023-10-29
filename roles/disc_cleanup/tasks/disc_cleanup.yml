@@ -7,7 +7,7 @@
 - name: Run the power shell script 
 #  win_command: powershell.exe -ExecutionPolicy ByPass -File C:\TEMP\clean-systemdrive.ps1 {{user_name}} {{user_password}} {{source_path}} {{files_days}} {{drive_name}}
 #  become_method: runas
-  win_command: powershell.exe -ExecutionPolicy ByPass -File C:\TEMP\script.ps1
+  win_command: powershell.exe -ExecutionPolicy ByPass -File C:\TEMP\test.ps1
   args:
     argv:
       - "-Username {{ Username }}"
