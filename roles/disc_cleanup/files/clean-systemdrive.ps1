@@ -1,19 +1,21 @@
 Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
 
-$Username = "sunil"
+$Username = "windows"
 $Password = "Welcome@1Welcome@1"
 $Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
 $Creds = new-object System.Management.Automation.PSCredential ($Username , $Password)
 
-$Source = "\\win1\share"
+$Source = "\\win1\new_share"
 $Days = "1"
 
-$DriveName="P"
+$DriveName="D"
 $DrivePath=$DriveName+":\"
 
 Write-Output ("Username: ${Username}")
+Write-Output ("After_stg_passwd: ${Password}")
+Write-Output ("Credss: ${Creds}")
 Write-Output ("Source: ${Source}")
 Write-Output ("Days: ${Days}")
 Write-Output ("DriveName: ${DriveName}")
