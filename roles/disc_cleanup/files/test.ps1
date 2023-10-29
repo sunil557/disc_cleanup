@@ -1,16 +1,16 @@
 Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
 
-$Username = "sunil"
+$Username = "windows"
 $Password = "Welcome@1Welcome@1"
 $Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
 $Creds = new-object System.Management.Automation.PSCredential ($Username , $Password)
 
 $Source = "\\win1\new_share"
-$Days = "1"
+$Days = "0"
 
-$DriveName="D"
+$DriveName="E"
 $DrivePath=$DriveName+":\"
 
 Write-Output ("Username: ${Username}")
@@ -40,6 +40,9 @@ New-PSDrive -Name $DriveName -Root $Source  -PSProvider "FileSystem" -Credential
 #cd $SharePath
 $Filenames=(dir $DrivePath | select * | Sort-Object Name | select-object Name).Name
 
+Write-Output ("file_names: ${Filenames}")
+Write-Output ("DrivePath: ${TruePath}")
+
 if (!(Test-Path "$DrivePath\logs"))
 {
 	New-Item -ItemType "Directory" -Path "$DrivePath\logs"
@@ -61,7 +64,7 @@ else
 
 foreach ( $Filename in $Filenames)
 {
-$TruePath=$DrivePath+'\'+$Filename+'\'
+$TruePath=$DrivePath+'\'+$Filename
 $Files=Get-ChildItem -Recurse -LiteralPath $TruePath | Where-Object { !$_.PSIsContainer -and  ($_.CreationTime -lt (get-date).adddays(-$Days)) -and ($_.LastWriteTime -lt (get-date).adddays(-$Days)) }
 
 if ($Files.count -gt 0)
@@ -70,6 +73,7 @@ if ($Files.count -gt 0)
 	ForEach( $File in $Files)
 	{
 		Write-Output $File.FullName
+#       Add-Content -Path "$DrivePath\logs\$(get-date -f yyyy-MM-dd).log" -Value "Deleting: $($File.FullName)"
 #		Remove-Item -Path $File.FullName -Force -ErrorAction SilentlyContinue
 		Remove-Item -Path $File.FullName -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue
 		Add-Content -Path "$DrivePath\logs\$(get-date -f yyyy-MM-dd).log" -Value $File.FullName
