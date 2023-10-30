@@ -13,7 +13,9 @@
 	#$Password = "Welcome@1Welcome@1"
 	#$Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
-#	$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+	$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+	Write-Output ("SecurePassword: ${SecurePassword}")
+	
 	$Creds = New-Object System.Management.Automation.PSCredential ($Username, $SecurePassword)
 
 

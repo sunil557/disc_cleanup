@@ -16,6 +16,9 @@
   #     - "-Days {{ Days }}"
   #     - "-DriveName {{ DriveName }}"
   register: result
-
+  become: yes
+  become_method: runas
+  become_user: Administrator
+#  become_flags: logon_type=new_credentials logon_flags=netcredentials
 
 - debug: msg="{{result}}"
