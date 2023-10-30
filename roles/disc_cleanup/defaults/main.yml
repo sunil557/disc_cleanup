@@ -8,7 +8,7 @@ Password: 'Welcome@1Welcome@1'
 #script: 'clean-systemdrive.ps1'
 script: 'test.ps1'
 
-Source: \\win1\new_share
+Source: '\\win1\new_share'
 #'\\GATWINDEV001\new'
 Days: '1'
 DriveName: 'P'
