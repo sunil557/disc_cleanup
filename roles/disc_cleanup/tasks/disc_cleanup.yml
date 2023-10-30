@@ -18,7 +18,7 @@
   
   become: yes
   become_method: runas
-#  become_user: Administrator
+  become_user: Administrator
   register: result
 #  become_flags: logon_type=new_credentials logon_flags=netcredentials
 
