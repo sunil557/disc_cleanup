@@ -18,8 +18,8 @@
   
   become: yes
   become_method: runas
-  become_user: Administrator
-  become_flags: logon_type=new_credentials logon_flags=netcredentials
+  become_user: "{{ Username }}"
+#  become_flags: logon_type=new_credentials logon_flags=netcredentials
   register: result
 
 - debug: msg="{{result}}"
