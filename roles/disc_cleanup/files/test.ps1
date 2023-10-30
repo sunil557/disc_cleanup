@@ -1,20 +1,25 @@
-Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
-
-Param (
-	[string]$Username,
-	[string]$Password
+param (
+    [string]$Username,
+    [string]$Password,
+    [string]$Source,
+    [string]$Days,
+    [string]$DriveName
 )
+
+Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
 #$Username = "windows"
 #$Password = "Welcome@1Welcome@1"
-$Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
+#$Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
-$Creds = new-object System.Management.Automation.PSCredential ($Username , $Password)
+$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+$Creds = New-Object System.Management.Automation.PSCredential ($Username, $SecurePassword)
 
-$Source = "\\win1\new_share"
-$Days = "0"
 
-$DriveName="E"
+#$Source = "\\win1\new_share"
+#$Days = "0"
+#$DriveName="E"
+
 $DrivePath=$DriveName+":\"
 
 Write-Output ("Username: ${Username}")
@@ -77,13 +82,10 @@ if ($Files.count -gt 0)
 	ForEach( $File in $Files)
 	{
 		Write-Output $File.FullName
-#       Add-Content -Path "$DrivePath\logs\$(get-date -f yyyy-MM-dd).log" -Value "Deleting: $($File.FullName)"
-#		Remove-Item -Path $File.FullName -Force -ErrorAction SilentlyContinue
 		Remove-Item -Path $File.FullName -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue
 		Add-Content -Path "$DrivePath\logs\$(get-date -f yyyy-MM-dd).log" -Value $File.FullName
 	}
 }
-
 }
 
 
