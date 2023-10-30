@@ -3,12 +3,12 @@
 
 download_path: 'C:\\TEMP\\'
 
-Username: 'sunil.varma'
-Password: 'Welcome@1'
+Username: 'windows'
+Password: 'Welcome@1Welcome@1'
 #script: 'clean-systemdrive.ps1'
 script: 'test.ps1'
 
-Source: '\\GATWINDEV001\new'
+Source: \\win1\new_share
+#'\\GATWINDEV001\new'
 Days: '1'
-
 DriveName: 'P'

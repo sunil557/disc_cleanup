@@ -1,8 +1,12 @@
 Write-Output ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
+Param (
+	[string]$Username,
+	[string]$Password
+)
 
-$Username = "windows"
-$Password = "Welcome@1Welcome@1"
+#$Username = "windows"
+#$Password = "Welcome@1Welcome@1"
 $Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
 $Creds = new-object System.Management.Automation.PSCredential ($Username , $Password)
