@@ -1,4 +1,4 @@
-#$Block = {
+
 param (
 	[string]$Username,
 	[string]$Password,
@@ -107,9 +107,3 @@ else
 {
 Write-Output "Not removed"
 }
-
-# }
-
-# $Session = New-PSSession -ComputerName win1 -Credential (New-Object PSCredential -ArgumentList $Username, (ConvertTo-SecureString -String $Password -AsPlainText -Force))
-# Invoke-Command -ScriptBlock $Block -ArgumentList $Username, $Password, $Source, $DriveName -Session $Session
-# Remove-PSSession $Session
