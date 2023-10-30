@@ -3,7 +3,7 @@
 
 download_path: 'C:\\TEMP\\'
 
-Username: 'windows'
+Username: 'sunil'
 Password: 'Welcome@1Welcome@1'
 #script: 'clean-systemdrive.ps1'
 script: 'test.ps1'
