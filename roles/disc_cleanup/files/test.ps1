@@ -1,4 +1,4 @@
-$Block = {
+#$Block = {
     param (
         [string]$Username,
         [string]$Password,
@@ -13,7 +13,7 @@ $Block = {
 	#$Password = "Welcome@1Welcome@1"
 	#$Password = ConvertTo-SecureString -string "$Password" -AsPlainText -Force 
 
-	$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+#	$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
 	$Creds = New-Object System.Management.Automation.PSCredential ($Username, $SecurePassword)
 
 
@@ -106,8 +106,8 @@ $Block = {
 	Write-Output "Not removed"
 	}
 
-}
+# }
 
-$Session = New-PSSession -ComputerName localhost -Credential (New-Object PSCredential -ArgumentList $Username, (ConvertTo-SecureString -String $Password -AsPlainText -Force))
-Invoke-Command -ScriptBlock $Block -ArgumentList $Username, $Password, $Source, $DriveName -Session $Session
-Remove-PSSession $Session
+# $Session = New-PSSession -ComputerName win1 -Credential (New-Object PSCredential -ArgumentList $Username, (ConvertTo-SecureString -String $Password -AsPlainText -Force))
+# Invoke-Command -ScriptBlock $Block -ArgumentList $Username, $Password, $Source, $DriveName -Session $Session
+# Remove-PSSession $Session
